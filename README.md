@@ -1,4 +1,5 @@
 # first-repo
-Getting familiar with GitHub navigation 
+Getting familiar with GitHub navigation, 
   
-  To show off my machine learning projects
+  to show off my machine learning projects.
+And merge my own pull requests. 
