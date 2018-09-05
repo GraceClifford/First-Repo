@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process version="5.3.013">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="5.3.013" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <parameter key="parallelize_main_process" value="false"/>
+    <process expanded="true">
+      <operator activated="true" class="read_csv" compatibility="5.3.013" expanded="true" height="60" name="Read CSV" width="90" x="112" y="75">
+        <parameter key="csv_file" value="C:\Users\jl9rf\Downloads\Lab 3 Data and Processes\train.csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="false"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="date_format" value=""/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="windows-1252"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="PassengerId.true.nominal.attribute"/>
+          <parameter key="1" value="Survived.true.nominal.attribute"/>
+          <parameter key="2" value="Pclass.true.nominal.attribute"/>
+          <parameter key="3" value="Name.true.polynominal.attribute"/>
+          <parameter key="4" value="Sex.true.nominal.attribute"/>
+          <parameter key="5" value="Age.true.real.attribute"/>
+          <parameter key="6" value="SibSp.true.integer.attribute"/>
+          <parameter key="7" value="Parch.true.integer.attribute"/>
+          <parameter key="8" value="Ticket.true.polynominal.attribute"/>
+          <parameter key="9" value="Fare.true.real.attribute"/>
+          <parameter key="10" value="Cabin.true.polynominal.attribute"/>
+          <parameter key="11" value="Embarked.true.polynominal.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+        <parameter key="datamanagement" value="double_array"/>
+      </operator>
+      <operator activated="true" class="set_role" compatibility="5.3.013" expanded="true" height="76" name="Set Role" width="90" x="246" y="75">
+        <parameter key="attribute_name" value="Survived"/>
+        <parameter key="target_role" value="label"/>
+        <list key="set_additional_roles">
+          <parameter key="PassengerId" value="id"/>
+        </list>
+      </operator>
+      <operator activated="true" class="decision_tree" compatibility="5.3.013" expanded="true" height="76" name="Decision Tree" width="90" x="514" y="75">
+        <parameter key="criterion" value="information_gain"/>
+        <parameter key="minimal_size_for_split" value="4"/>
+        <parameter key="minimal_leaf_size" value="2"/>
+        <parameter key="minimal_gain" value="0.03"/>
+        <parameter key="maximal_depth" value="20"/>
+        <parameter key="confidence" value="0.25"/>
+        <parameter key="number_of_prepruning_alternatives" value="3"/>
+        <parameter key="no_pre_pruning" value="false"/>
+        <parameter key="no_pruning" value="false"/>
+      </operator>
+      <operator activated="true" class="read_csv" compatibility="5.3.013" expanded="true" height="60" name="Read CSV (2)" width="90" x="179" y="210">
+        <parameter key="csv_file" value="C:\Users\jl9rf\Downloads\Lab 3 Data and Processes\test.csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="false"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="date_format" value=""/>
+        <parameter key="first_row_as_names" value="false"/>
+        <list key="annotations">
+          <parameter key="0" value="Name"/>
+        </list>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="windows-1252"/>
+        <list key="data_set_meta_data_information">
+          <parameter key="0" value="PassengerId.true.nominal.attribute"/>
+          <parameter key="1" value="Pclass.true.nominal.attribute"/>
+          <parameter key="2" value="Name.true.polynominal.attribute"/>
+          <parameter key="3" value="Sex.true.binominal.attribute"/>
+          <parameter key="4" value="Age.true.real.attribute"/>
+          <parameter key="5" value="SibSp.true.integer.attribute"/>
+          <parameter key="6" value="Parch.true.integer.attribute"/>
+          <parameter key="7" value="Ticket.true.polynominal.attribute"/>
+          <parameter key="8" value="Fare.true.real.attribute"/>
+          <parameter key="9" value="Cabin.true.polynominal.attribute"/>
+          <parameter key="10" value="Embarked.true.polynominal.attribute"/>
+        </list>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+        <parameter key="datamanagement" value="double_array"/>
+      </operator>
+      <operator activated="true" class="apply_model" compatibility="5.3.013" expanded="true" height="76" name="Apply Model" width="90" x="514" y="210">
+        <list key="application_parameters"/>
+        <parameter key="create_view" value="false"/>
+      </operator>
+      <operator activated="true" class="write_csv" compatibility="5.3.013" expanded="true" height="76" name="Write CSV" width="90" x="715" y="210">
+        <parameter key="csv_file" value="C:\Users\jl9rf\Downloads\Lab 3 Data and Processes\sample_submission2.csv"/>
+        <parameter key="column_separator" value=","/>
+        <parameter key="write_attribute_names" value="true"/>
+        <parameter key="quote_nominal_values" value="true"/>
+        <parameter key="format_date_attributes" value="true"/>
+        <parameter key="append_to_file" value="false"/>
+        <parameter key="encoding" value="SYSTEM"/>
+      </operator>
+      <connect from_op="Read CSV" from_port="output" to_op="Set Role" to_port="example set input"/>
+      <connect from_op="Set Role" from_port="example set output" to_op="Decision Tree" to_port="training set"/>
+      <connect from_op="Decision Tree" from_port="model" to_op="Apply Model" to_port="model"/>
+      <connect from_op="Read CSV (2)" from_port="output" to_op="Apply Model" to_port="unlabelled data"/>
+      <connect from_op="Apply Model" from_port="labelled data" to_op="Write CSV" to_port="input"/>
+      <connect from_op="Apply Model" from_port="model" to_port="result 2"/>
+      <connect from_op="Write CSV" from_port="through" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+      <portSpacing port="sink_result 3" spacing="0"/>
+    </process>
+  </operator>
+</process>
